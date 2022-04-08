@@ -1,0 +1,31 @@
+ISSUES:
+using objects in inventory!
+conditions not working puzzle
+safe combination
+remove button animation
+
+
+POSSIBLE SOLUTIONS:
+is there a way to drag a button to a specific spot?
+or keep the button pressed until you click on another button?
+
+
+
+OTHER MUST:
+come up with story
+come up with puzzles
+find a suitable .wav sound for main game
+
+
+TO ADD:
+second box
+books
+calendar
+bin
+...
+
+
+
+EXTRAS:
+ppt presentation?
+other ideas?
