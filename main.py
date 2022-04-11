@@ -98,7 +98,7 @@ def ViewPic():
         dismiss_btn.pack(pady=20)
         dismiss_btn.place(x =820, y = 620,width=50,height=50)
     else:
-        
+        winsound.PlaySound("sounds/paper2.wav", winsound.SND_ASYNC) 
         cannot_read_img = PhotoImage(file='images/paperpiece.png')
         cannot_read_btn = Button(image=cannot_read_img, bd=0,cursor="circle")
         cannot_read_btn.image = cannot_read_img # keep a reference!
@@ -111,10 +111,10 @@ def ViewPic():
         cannot_read_text["fg"] = "white"
         cannot_read_text["font"] = "helvetica, 14"
 
-        open_img = PhotoImage(file='images/x.png')
+        dismiss_img = PhotoImage(file='images/x.png')
         dismiss_btn_commands = lambda: [dismiss_btn.destroy(),cannot_read_btn.destroy(),cannot_read_text.destroy()]
-        dismiss_btn = Button(image=open_img, bd=0,cursor="circle",command=dismiss_btn_commands)
-        dismiss_btn.image = open_img # keep a reference!
+        dismiss_btn = Button(image=dismiss_img, bd=0,cursor="circle",command=dismiss_btn_commands)
+        dismiss_btn.image = dismiss_img # keep a reference!
         dismiss_btn.pack(pady=20)
         dismiss_btn.place(x =910, y = 620,width=50,height=50)
         
@@ -226,11 +226,11 @@ def OpenSmallBox():
 def InspectPainting1():
     winsound.PlaySound("sounds/painting1.wav", winsound.SND_ASYNC) 
     objects.append("painting_clue")
-    painting_img = PhotoImage(file='images/puppy.png')
+    painting_img = PhotoImage(file='images/puppyreal.png')
     painting_btn = Button(image=painting_img, bd=0,cursor="circle")
     painting_btn.image = painting_img # keep a reference!
     painting_btn.pack()
-    painting_btn.place(x =610, y = 600,width=150,height=200)
+    painting_btn.place(x =590, y = 600,width=300,height=200)
     open_img = PhotoImage(file='images/x.png')
     dismiss_btn_commands = lambda: [dismiss_btn.destroy(),painting_btn.destroy()]
     dismiss_btn = Button(image=open_img, bd=0,cursor="circle",command=dismiss_btn_commands)
@@ -328,14 +328,15 @@ def ViewMessage():
         messagepic_btn.pack()
         messagepic_btn.place(x =540, y = 610,width=350,height=300)
 
-        open_img = PhotoImage(file='images/x.png')
+        dismiss_img = PhotoImage(file='images/x.png')
         dismiss_btn_commands = lambda: [dismiss_btn.destroy(),messagepic_btn.destroy()]
-        dismiss_btn = Button(image=open_img, bd=0,cursor="circle",command=dismiss_btn_commands)
-        dismiss_btn.image = open_img # keep a reference!
+        dismiss_btn = Button(image=dismiss_img, bd=0,cursor="circle",command=dismiss_btn_commands)
+        dismiss_btn.image = dismiss_img # keep a reference!
         dismiss_btn.pack(pady=20)
         dismiss_btn.place(x =930, y = 620,width=50,height=50)
     
     else:
+        winsound.PlaySound("sounds/paper2.wav", winsound.SND_ASYNC) 
         small_writing_img = PhotoImage(file='images/smallwriting.png')
         small_writing_btn = Button(image=small_writing_img, bd=0,cursor="circle")
         small_writing_btn.image = small_writing_img # keep a reference!
@@ -349,10 +350,10 @@ def ViewMessage():
         small_writing_text["font"] = "helvetica, 14"
 
 
-        open_img = PhotoImage(file='images/x.png')
+        dismiss_img = PhotoImage(file='images/x.png')
         dismiss_btn_commands = lambda: [dismiss_btn.destroy(),small_writing_btn.destroy(),small_writing_text.destroy()]
-        dismiss_btn = Button(image=open_img, bd=0,cursor="circle",command=dismiss_btn_commands)
-        dismiss_btn.image = open_img # keep a reference!
+        dismiss_btn = Button(image=dismiss_img, bd=0,cursor="circle",command=dismiss_btn_commands)
+        dismiss_btn.image = dismiss_img # keep a reference!
         dismiss_btn.pack(pady=20)
         dismiss_btn.place(x =910, y = 620,width=50,height=50)
 
@@ -410,7 +411,7 @@ def InspectBin():
         pass
         winsound.PlaySound("sounds/pickobject.wav", winsound.SND_ASYNC) 
         newspaper_text = Label(text = "There is a magazine in the bin")
-        window.after(3000, lambda: newspaper_text.destroy())
+        window.after(1000, lambda: newspaper_text.destroy())
         newspaper_img_small = PhotoImage(file='images/news-small.png')
         newspaper_btn = Button(image=newspaper_img_small, bd=0,cursor="circle", command=ShowMagazine)
         newspaper_btn.image = newspaper_img_small # keep a reference!
@@ -513,10 +514,11 @@ def OpenCupbpard():
         easter_egg_btn.image = easter_egg_img # keep a reference!
         easter_egg_btn.pack()
         easter_egg_btn.place(x =650, y = 600,width=120,height=130)
-        open_img = PhotoImage(file='images/x.png')
+
+        dismiss_img = PhotoImage(file='images/x.png')
         dismiss_btn_commands = lambda: [dismiss_btn.destroy(),easter_egg_btn.destroy(),easter_egg_text.destroy(),ShowEasterEgg()]
-        dismiss_btn = Button(image=open_img, bd=0,cursor="circle",command=dismiss_btn_commands)
-        dismiss_btn.image = open_img # keep a reference!
+        dismiss_btn = Button(image=dismiss_img, bd=0,cursor="circle",command=dismiss_btn_commands)
+        dismiss_btn.image = dismiss_img # keep a reference!
         dismiss_btn.pack(pady=20)
         dismiss_btn.place(x =910, y = 620,width=50,height=50)
         
@@ -533,7 +535,7 @@ def OpenSafe():
         winsound.PlaySound("sounds/bling.wav", winsound.SND_ASYNC)
         safe_text = Label(text = """Correct! 
 
-        You found the key door!""")
+        You found the door key!""")
         window.after(2000, lambda: safe_text.destroy())
         objects.append("key")
         doorkey_img = PhotoImage(file='images/doorkey.png')
@@ -541,7 +543,7 @@ def OpenSafe():
         doorkey_btn.image = doorkey_img # keep a reference!
         doorkey_btn.pack()
         doorkey_btn.place(x=130, y=260,width=50,height=50)
-        tip.bind_widget(doorkey_btn,balloonmsg="doorkey")
+        tip.bind_widget(doorkey_btn,balloonmsg="Door key")
         safe_text.place(x=580, y = 650)
         safe_text["bg"] = "black"
         safe_text["fg"] = "white"
@@ -549,45 +551,51 @@ def OpenSafe():
         objects.append("doorkey")
 
 def AskCombination():
+    if "doorkey" in objects:
+        already_done = Label(text = "There is nothing else here")
+        window.after(1000, lambda: already_done.destroy())
+        already_done.place(x =610, y = 650)
+        already_done["bg"] = "black"
+        already_done["fg"] = "white"
+        already_done["font"] = "helvetica, 14"
+    else:
     
-    global correct_answer
-    global insert
-    global check    
-    
-    correct_answer = "Lindsey and Angelo are the best"
+        global correct_answer
+        global insert
+        global check    
+        
+        correct_answer = ["Lindsey and Angelo are the best", "Angelo and Lindsey are the best"]
 
 
-    enter_combination = Label(text = "Enter combination")
-    enter_combination.place(x =645, y = 650)
-    enter_combination["bg"] = "black"
-    enter_combination["fg"] = "white"
-    enter_combination["font"] = "helvetica, 14"
+        enter_combination = Label(text = "Enter combination")
+        enter_combination.place(x =645, y = 650)
+        enter_combination["bg"] = "black"
+        enter_combination["fg"] = "white"
+        enter_combination["font"] = "helvetica, 14"
 
 
-    check = Label(text = "check")
-    check.place(x =698, y = 800)
-    check["bg"] = "black"
-    check["fg"] = "white"
-    check["font"] = "helvetica, 14"
+        check = Label(text = "check")
+        check.place(x =698, y = 800)
+        check["bg"] = "black"
+        check["fg"] = "white"
+        check["font"] = "helvetica, 14"
 
 
-    insert = Entry(textvariable="")
-    insert.pack()
-    insert.place(x =620, y = 700, width = 200, height = 25)
-    insert["justify"] = "center"
-    insert.focus()
-    combination_inserted = insert.get()
-    str(combination_inserted)
-    
+        insert = Entry(textvariable="")
+        insert.pack()
+        insert.place(x =620, y = 700, width = 200, height = 25)
+        insert["justify"] = "center"
+        insert.focus()
+        combination_inserted = insert.get()
+        str(combination_inserted)
+        
 
-    
-
-    open_img = PhotoImage(file='images/lock.png')
-    open_btn_commands = lambda: [open_btn.destroy(), enter_combination.destroy(), Check_if_Combination_Is_Correct()]
-    open_btn = Button(image=open_img, bd=0,cursor="circle",command=open_btn_commands)
-    open_btn.image = open_img # keep a reference!
-    open_btn.pack(pady=20)
-    open_btn.place(x =700, y = 750,width=50,height=50)
+        open_img = PhotoImage(file='images/lock.png')
+        open_btn_commands = lambda: [open_btn.destroy(), enter_combination.destroy(), Check_if_Combination_Is_Correct()]
+        open_btn = Button(image=open_img, bd=0,cursor="circle",command=open_btn_commands)
+        open_btn.image = open_img # keep a reference!
+        open_btn.pack(pady=20)
+        open_btn.place(x =700, y = 750,width=50,height=50)
     
 def Check_if_Combination_Is_Correct():
     global correct_answer
@@ -599,7 +607,7 @@ def Check_if_Combination_Is_Correct():
     str(insert)
 
     
-    if combination_inserted == correct_answer:
+    if combination_inserted in correct_answer:
         OpenSafe()
         insert.destroy()
         check.destroy()
@@ -629,6 +637,12 @@ def Out():
     you_win_text["fg"] = "white"
     you_win_text["font"] = "helvetica, 14"
 
+    enjoy_text = Label(text = "We hope you enjoyed the game!")
+    enjoy_text.place(x =590, y = 750)
+    enjoy_text["bg"] = "black"
+    enjoy_text["fg"] = "white"
+    enjoy_text["font"] = "helvetica, 14"
+
 def OpenDoor():
     global intro1
     if "doorkey" not in objects: 
@@ -642,16 +656,29 @@ def OpenDoor():
     else:
         winsound.PlaySound("sounds/dooropen.wav", winsound.SND_ASYNC) 
         open_door_txt = Label(text = "Go out!")
-        open_door_txt.place(x =690, y = 650)
+        open_door_txt.place(x =630, y = 650)
         open_door_txt["bg"] = "black"
         open_door_txt["fg"] = "white"
         open_door_txt["font"] = "helvetica, 14"
         doorhandle_img = PhotoImage(file='images/doorhandle.png')
-        doorhandle_btn_commands = lambda: [doorhandle_btn.destroy(), open_door_txt.destroy(), Out()]
+        doorhandle_btn_commands = lambda: [doorhandle_btn.destroy(), open_door_txt.destroy(), stay_txt.destroy(),stay_btn.destroy(),Out()]
         doorhandle_btn = Button(image=doorhandle_img, bd=0,cursor="circle", command=doorhandle_btn_commands)
         doorhandle_btn.image = doorhandle_img # keep a reference!
         doorhandle_btn.pack(pady=20)
-        doorhandle_btn.place(x =700, y = 600,width=50,height=50)
+        doorhandle_btn.place(x =640, y = 600,width=50,height=50)
+
+        stay_txt = Label(text = "Stay in")
+        stay_txt.place(x =710, y = 650)
+        stay_txt["bg"] = "black"
+        stay_txt["fg"] = "white"
+        stay_txt["font"] = "helvetica, 14"
+
+        stay_img = PhotoImage(file='images/stay.png')
+        stay_btn_commands = lambda: [doorhandle_btn.destroy(), open_door_txt.destroy(),stay_txt.destroy(),stay_btn.destroy()]
+        stay_btn = Button(image=stay_img, bd=0,cursor="circle", command=stay_btn_commands)
+        stay_btn.image = stay_img # keep a reference!
+        stay_btn.pack(pady=20)
+        stay_btn.place(x =720, y = 600,width=50,height=50)
         
 
 
