@@ -1,5 +1,5 @@
 
-import tkinter.messagebox
+
 from tkinter import *
 from tkinter.tix import *
 import winsound
@@ -86,7 +86,7 @@ def ViewPic():
     if "ink" in objects:
         winsound.PlaySound("sounds/paper2.wav", winsound.SND_ASYNC) 
         objects.append("doc_clue")
-        pic_img = PhotoImage(file='images/angel.png')
+        pic_img = PhotoImage(file='images/raven.png')
         pic_btn = Button(image=pic_img, bd=0,cursor="circle")
         pic_btn.image = pic_img # keep a reference!
         pic_btn.pack()
@@ -241,11 +241,11 @@ def InspectPainting1():
 def InspectPainting2():
     winsound.PlaySound("sounds/painting1.wav", winsound.SND_ASYNC) 
     objects.append("painting2_clue")
-    painting2_img = PhotoImage(file='images/mancity.png')
+    painting2_img = PhotoImage(file='images/liverpool.png')
     painting2_btn = Button(image=painting2_img, bd=0,cursor="circle")
     painting2_btn.image = painting2_img # keep a reference!
     painting2_btn.pack()
-    painting2_btn.place(x=610, y=600,width=190,height=200)
+    painting2_btn.place(x=610, y=600,width=190,height=150)
     open_img = PhotoImage(file='images/x.png')
     dismiss_btn_commands = lambda: [dismiss_btn.destroy(),painting2_btn.destroy()]
     dismiss_btn = Button(image=open_img, bd=0,cursor="circle",command=dismiss_btn_commands)
@@ -297,11 +297,11 @@ def InspectCalendar():
 def ViewPlant():
     winsound.PlaySound("sounds/paper.wav", winsound.SND_ASYNC) 
     objects.append("plant_clue")
-    pant_img = PhotoImage(file='images/xmas.png')
+    pant_img = PhotoImage(file='images/december.png')
     pant_btn = Button(image=pant_img, bd=0,cursor="circle")
     pant_btn.image = pant_img # keep a reference!
     pant_btn.pack()
-    pant_btn.place(x =630, y = 620,width=200,height=250)
+    pant_btn.place(x =630, y = 620,width=200,height=80)
     window.after(3000, lambda: pant_btn.destroy())
    
 def TurnLightOn():
@@ -312,6 +312,24 @@ def TurnLightOn():
     light["bg"] = "black"
     light["fg"] = "white"
     light["font"] = "helvetica, 14"
+
+def ViewFan():
+    winsound.PlaySound("sounds/fan.wav", winsound.SND_ASYNC)  
+    light = Label(text = "Refreshing...")
+    window.after(1000, lambda: light.destroy())
+    light.place(x =620, y = 650)
+    light["bg"] = "black"
+    light["fg"] = "white"
+    light["font"] = "helvetica, 14"
+
+def ViewWindow():
+    winsound.PlaySound("sounds/knock.wav", winsound.SND_ASYNC)  
+    windowimg = Label(text = "I really want to go out :( ...")
+    window.after(3000, lambda: windowimg.destroy())
+    windowimg.place(x =610, y = 650)
+    windowimg["bg"] = "black"
+    windowimg["fg"] = "white"
+    windowimg["font"] = "helvetica, 14"
 
 def InspectBooks1():
     winsound.PlaySound("sounds/paper2.wav", winsound.SND_ASYNC) 
@@ -351,7 +369,7 @@ def ViewMessage():
         messagepic_btn = Button(image=messagepic_img, bd=0,cursor="circle")
         messagepic_btn.image = messagepic_img # keep a reference!
         messagepic_btn.pack()
-        messagepic_btn.place(x =540, y = 610,width=350,height=300)
+        messagepic_btn.place(x =540, y = 610,width=300,height=300)
 
         dismiss_img = PhotoImage(file='images/x.png')
         dismiss_btn_commands = lambda: [dismiss_btn.destroy(),messagepic_btn.destroy()]
@@ -394,7 +412,7 @@ def InspectBooks2():
     else:
         winsound.PlaySound("sounds/pickobject.wav", winsound.SND_ASYNC) 
         books2_text = Label(text = "You found a message...")
-        window.after(3000, lambda: books2_text.destroy())
+        window.after(1000, lambda: books2_text.destroy())
         objects.append("message")
         message_img = PhotoImage(file='images/message.png')
         message_btn = Button(image=message_img, bd=0,cursor="circle",command=ViewMessage)
@@ -472,7 +490,7 @@ def AskCupboardombination():
         already_done["fg"] = "white"
         already_done["font"] = "helvetica, 14"
     else:
-        enter_cupboard_answer = Label(text = "Enter number")
+        enter_cupboard_answer = Label(text = "Enter password")
         enter_cupboard_answer.place(x =645, y = 650)
         enter_cupboard_answer["bg"] = "black"
         enter_cupboard_answer["fg"] = "white"
@@ -590,7 +608,8 @@ def AskCombination():
         global insert
         global check    
         
-        correct_answer = ["Lindsey and Angelo are the best", "Angelo and Lindsey are the best"]
+        correct_answer = ["Lindsey is the best", "Lindsey Raven is the best"]
+
 
 
         enter_combination = Label(text = "Enter combination")
@@ -627,7 +646,7 @@ def Check_if_Combination_Is_Correct():
     global correct_answer
     global insert
     global check
-    
+
 
     combination_inserted = insert.get()
     str(insert)
@@ -664,10 +683,30 @@ def Out():
     you_win_text["font"] = "helvetica, 14"
 
     enjoy_text = Label(text = "We hope you enjoyed the game!")
-    enjoy_text.place(x =590, y = 750)
+    enjoy_text.place(x =570, y = 750)
     enjoy_text["bg"] = "black"
     enjoy_text["fg"] = "white"
     enjoy_text["font"] = "helvetica, 14"
+
+    if "easteregg" in objects:
+        outro1 = Label(text = """
+        Well done
+        on finding 
+        the Easter Egg!
+        """)
+        outro1.place(x =1270, y = 30)
+        outro1["bg"] = "black"
+        outro1["fg"] = "white"
+        outro1["font"] = "helvetica, 14"
+    else:
+        outro2 = Label(text = """
+        You didn't find
+        the Easter Egg :(
+        """)
+        outro2.place(x =1270, y = 30)
+        outro2["bg"] = "black"
+        outro2["fg"] = "white"
+        outro2["font"] = "helvetica, 14"
 
 def OpenDoor():
     global intro1
@@ -773,10 +812,20 @@ calendar = Button(command = InspectCalendar,image=calendar_img, highlightthickne
 tip.bind_widget(calendar,balloonmsg="Inspect calendar")
 calendar.place(x=793, y=176)
 
+fan_img = PhotoImage(file='images/fan.png')
+fan = Button(command = ViewFan,image=fan_img, highlightthickness = 0, bd = 0,relief=RIDGE,cursor="circle")
+tip.bind_widget(fan,balloonmsg="View fan")
+fan.place(x=850, y=116)
+
 light_img = PhotoImage(file='images/light.png')
 light = Button(command = TurnLightOn,image=light_img, highlightthickness = 0, bd = 0,relief=RIDGE,cursor="circle")
 tip.bind_widget(light,balloonmsg="Turn light on")
 light.place(x=725, y=208)
+
+window_img = PhotoImage(file='images/window.png')
+window = Button(command = ViewWindow,image=window_img, highlightthickness = 0, bd = 0,relief=RIDGE,cursor="circle")
+tip.bind_widget(window,balloonmsg="View window")
+window.place(x=308, y=140)
 
 box_img = PhotoImage(file='images/box.png')
 box = Button(command = OpenBox,image=box_img, highlightthickness = 0, bd = 0, cursor="circle")
