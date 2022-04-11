@@ -20,10 +20,10 @@ Label(window,image=img).pack()
 
 
 
-intro1 = Label(text = """Find 8 objects
-and work out 
-the clues to 
-escape the room! 
+intro1 = Label(text = """You are locked
+in this room!
+Find the door key 
+and escape!
 Good luck!
 
 BONUS:
@@ -294,6 +294,16 @@ def InspectCalendar():
     window.after(3000, lambda: calendar_btn.destroy())
     calendar_btn.place(x =610, y = 650)
     
+def ViewPlant():
+    winsound.PlaySound("sounds/paper.wav", winsound.SND_ASYNC) 
+    objects.append("plant_clue")
+    pant_img = PhotoImage(file='images/xmas.png')
+    pant_btn = Button(image=pant_img, bd=0,cursor="circle")
+    pant_btn.image = pant_img # keep a reference!
+    pant_btn.pack()
+    pant_btn.place(x =630, y = 620,width=200,height=250)
+    window.after(3000, lambda: pant_btn.destroy())
+   
 def TurnLightOn():
     winsound.PlaySound("sounds/click.wav", winsound.SND_ASYNC)  
     light = Label(text = "The light doesn't work")
@@ -311,6 +321,21 @@ def InspectBooks1():
     book_btn.image = book_img # keep a reference!
     book_btn.pack()
     book_btn.place(x =610, y = 590,width=260,height=350)
+    open_img = PhotoImage(file='images/x.png')
+    dismiss_btn_commands = lambda: [dismiss_btn.destroy(),book_btn.destroy()]
+    dismiss_btn = Button(image=open_img, bd=0,cursor="circle",command=dismiss_btn_commands)
+    dismiss_btn.image = open_img # keep a reference!
+    dismiss_btn.pack(pady=20)
+    dismiss_btn.place(x =910, y = 620,width=50,height=50)
+
+def OpenBook():
+    winsound.PlaySound("sounds/paper2.wav", winsound.SND_ASYNC) 
+    objects.append("bigbook_clue")
+    book_img = PhotoImage(file='images/javascript.png')
+    book_btn = Button(image=book_img, bd=0,cursor="circle")
+    book_btn.image = book_img # keep a reference!
+    book_btn.pack()
+    book_btn.place(x =610, y = 590,width=210,height=260)
     open_img = PhotoImage(file='images/x.png')
     dismiss_btn_commands = lambda: [dismiss_btn.destroy(),book_btn.destroy()]
     dismiss_btn = Button(image=open_img, bd=0,cursor="circle",command=dismiss_btn_commands)
@@ -437,42 +462,50 @@ def AskCupboardombination():
     global insert_cupboard
     global check_cupboard_answer 
     
-    cupboard_correct_answer = "25"
+    cupboard_correct_answer = "christmas"
+
+    if "easteregg" in objects: 
+        already_done = Label(text = "There is nothing else here")
+        window.after(1000, lambda: already_done.destroy())
+        already_done.place(x =610, y = 650)
+        already_done["bg"] = "black"
+        already_done["fg"] = "white"
+        already_done["font"] = "helvetica, 14"
+    else:
+        enter_cupboard_answer = Label(text = "Enter number")
+        enter_cupboard_answer.place(x =645, y = 650)
+        enter_cupboard_answer["bg"] = "black"
+        enter_cupboard_answer["fg"] = "white"
+        enter_cupboard_answer["font"] = "helvetica, 14"
 
 
-    enter_cupboard_answer = Label(text = "Enter number")
-    enter_cupboard_answer.place(x =645, y = 650)
-    enter_cupboard_answer["bg"] = "black"
-    enter_cupboard_answer["fg"] = "white"
-    enter_cupboard_answer["font"] = "helvetica, 14"
+        check_cupboard_answer = Label(text = "check")
+        check_cupboard_answer.place(x =690, y = 800)
+        check_cupboard_answer["bg"] = "black"
+        check_cupboard_answer["fg"] = "white"
+        check_cupboard_answer["font"] = "helvetica, 14"
 
 
-    check_cupboard_answer = Label(text = "check")
-    check_cupboard_answer.place(x =690, y = 800)
-    check_cupboard_answer["bg"] = "black"
-    check_cupboard_answer["fg"] = "white"
-    check_cupboard_answer["font"] = "helvetica, 14"
-
-
-    insert_cupboard = Entry(textvariable="")
-    insert_cupboard.pack()
-    insert_cupboard.place(x =620, y = 700, width = 200, height = 25)
-    insert_cupboard["justify"] = "center"
-    insert_cupboard.focus()
-    cupboard_combination_inserted = insert_cupboard.get()
-    str(cupboard_combination_inserted)
-    
-    open_cupboard_img = PhotoImage(file='images/cupboardlock.png')
-    open_btn_commands = lambda: [open_cupboard_btn.destroy(), enter_cupboard_answer.destroy(), Check_if_Cupbopard_Combination_Is_Correct()]
-    open_cupboard_btn = Button(image=open_cupboard_img, bd=0,cursor="circle",command=open_btn_commands)
-    open_cupboard_btn.image = open_cupboard_img # keep a reference!
-    open_cupboard_btn.pack(pady=20)
-    open_cupboard_btn.place(x =690, y = 750,width=50,height=50)
-    
+        insert_cupboard = Entry(textvariable="")
+        insert_cupboard.pack()
+        insert_cupboard.place(x =620, y = 700, width = 200, height = 25)
+        insert_cupboard["justify"] = "center"
+        insert_cupboard.focus()
+        cupboard_combination_inserted = insert_cupboard.get()
+        str(cupboard_combination_inserted)
+        
+        open_cupboard_img = PhotoImage(file='images/cupboardlock.png')
+        open_btn_commands = lambda: [open_cupboard_btn.destroy(), enter_cupboard_answer.destroy(), Check_if_Cupbopard_Combination_Is_Correct()]
+        open_cupboard_btn = Button(image=open_cupboard_img, bd=0,cursor="circle",command=open_btn_commands)
+        open_cupboard_btn.image = open_cupboard_img # keep a reference!
+        open_cupboard_btn.pack(pady=20)
+        open_cupboard_btn.place(x =690, y = 750,width=50,height=50)
+        
 def Check_if_Cupbopard_Combination_Is_Correct():
     global cupboard_correct_answer
     global insert_cupboard
     global check_cupboard_answer 
+    cupboard_correct_answer = cupboard_correct_answer.lower()
 
     cupboard_combination_inserted = insert_cupboard.get()
     str(insert_cupboard)
@@ -494,33 +527,26 @@ def Check_if_Cupbopard_Combination_Is_Correct():
         check_cupboard_answer.destroy()
 
 def OpenCupbpard():
-    if "easteregg" in objects: 
-        already_done = Label(text = "There is nothing else here")
-        window.after(1000, lambda: already_done.destroy())
-        already_done.place(x =610, y = 650)
-        already_done["bg"] = "black"
-        already_done["fg"] = "white"
-        already_done["font"] = "helvetica, 14"
-    else:
-        winsound.PlaySound("sounds/bling.wav", winsound.SND_ASYNC)
-        easter_egg_text = Label(text = "YOU FOUND THE EASTER EGG!")
-        easter_egg_text.place(x =560, y = 810)
-        easter_egg_text["bg"] = "black"
-        easter_egg_text["fg"] = "white"
-        easter_egg_text["font"] = "helvetica, 14"
+    winsound.PlaySound("sounds/bling.wav", winsound.SND_ASYNC)
+    easter_egg_text = Label(text = "YOU FOUND THE EASTER EGG!")
+    easter_egg_text.place(x =560, y = 810)
+    easter_egg_text["bg"] = "black"
+    easter_egg_text["fg"] = "white"
+    easter_egg_text["font"] = "helvetica, 14"
+    objects.append("easteregg")
 
-        easter_egg_img = PhotoImage(file='images/easteregg.png')
-        easter_egg_btn = Button(image=easter_egg_img, bd=0,cursor="circle")
-        easter_egg_btn.image = easter_egg_img # keep a reference!
-        easter_egg_btn.pack()
-        easter_egg_btn.place(x =650, y = 600,width=120,height=130)
+    easter_egg_img = PhotoImage(file='images/easteregg.png')
+    easter_egg_btn = Button(image=easter_egg_img, bd=0,cursor="circle")
+    easter_egg_btn.image = easter_egg_img # keep a reference!
+    easter_egg_btn.pack()
+    easter_egg_btn.place(x =650, y = 600,width=120,height=130)
 
-        dismiss_img = PhotoImage(file='images/x.png')
-        dismiss_btn_commands = lambda: [dismiss_btn.destroy(),easter_egg_btn.destroy(),easter_egg_text.destroy(),ShowEasterEgg()]
-        dismiss_btn = Button(image=dismiss_img, bd=0,cursor="circle",command=dismiss_btn_commands)
-        dismiss_btn.image = dismiss_img # keep a reference!
-        dismiss_btn.pack(pady=20)
-        dismiss_btn.place(x =910, y = 620,width=50,height=50)
+    dismiss_img = PhotoImage(file='images/x.png')
+    dismiss_btn_commands = lambda: [dismiss_btn.destroy(),easter_egg_btn.destroy(),easter_egg_text.destroy(),ShowEasterEgg()]
+    dismiss_btn = Button(image=dismiss_img, bd=0,cursor="circle",command=dismiss_btn_commands)
+    dismiss_btn.image = dismiss_img # keep a reference!
+    dismiss_btn.pack(pady=20)
+    dismiss_btn.place(x =910, y = 620,width=50,height=50)
         
 def OpenSafe():
 
@@ -771,6 +797,17 @@ cupboard_img = PhotoImage(file='images/cupboard.png')
 cupboard = Button(command = AskCupboardombination,image=cupboard_img, highlightthickness = 0, bd = 0, cursor="circle")
 tip.bind_widget(cupboard,balloonmsg="Inspect bin")
 cupboard.place(x=1120, y=295)
+
+plant_img = PhotoImage(file='images/plant.png')
+plant = Button(command = ViewPlant,image=plant_img, highlightthickness = 0, bd = 0, cursor="circle")
+tip.bind_widget(plant,balloonmsg="Inspect plant")
+plant.place(x=1170, y=350)
+
+big_book_img = PhotoImage(file='images/bigbook.png')
+big_book = Button(command = OpenBook,image=big_book_img, highlightthickness = 0, bd = 0, cursor="circle")
+tip.bind_widget(big_book,balloonmsg="Inspect book")
+big_book.place(x=1133, y=378)
+
 
 
 
