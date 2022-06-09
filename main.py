@@ -2,7 +2,10 @@
 
 from tkinter import *
 from tkinter.tix import *
+from turtle import back
 import winsound
+
+from pkg_resources import safe_extra
 
 # sound = winsound.PlaySound("main.wav", winsound.SND_ASYNC + winsound.SND_LOOP)  
 
@@ -595,6 +598,7 @@ def OpenSafe():
         objects.append("doorkey")
 
 def AskCombination():
+   
     if "doorkey" in objects:
         already_done = Label(text = "There is nothing else here")
         window.after(1000, lambda: already_done.destroy())
@@ -603,14 +607,11 @@ def AskCombination():
         already_done["fg"] = "white"
         already_done["font"] = "helvetica, 14"
     else:
-    
         global correct_answer
         global insert
         global check    
         
         correct_answer = ["Lindsey is the best", "Lindsey Raven is the best"]
-
-
 
         enter_combination = Label(text = "Enter combination")
         enter_combination.place(x =645, y = 650)
@@ -618,13 +619,11 @@ def AskCombination():
         enter_combination["fg"] = "white"
         enter_combination["font"] = "helvetica, 14"
 
-
         check = Label(text = "check")
         check.place(x =698, y = 800)
         check["bg"] = "black"
         check["fg"] = "white"
         check["font"] = "helvetica, 14"
-
 
         insert = Entry(textvariable="")
         insert.pack()
@@ -634,19 +633,19 @@ def AskCombination():
         combination_inserted = insert.get()
         str(combination_inserted)
         
-
         open_img = PhotoImage(file='images/lock.png')
-        open_btn_commands = lambda: [open_btn.destroy(), enter_combination.destroy(), Check_if_Combination_Is_Correct()]
+        open_btn_commands = lambda: [open_btn.destroy(), enter_combination.destroy(),Check_if_Combination_Is_Correct()]
         open_btn = Button(image=open_img, bd=0,cursor="circle",command=open_btn_commands)
         open_btn.image = open_img # keep a reference!
         open_btn.pack(pady=20)
         open_btn.place(x =700, y = 750,width=50,height=50)
-    
+        
+
 def Check_if_Combination_Is_Correct():
+    
     global correct_answer
     global insert
     global check
-
 
     combination_inserted = insert.get()
     str(insert)
@@ -656,6 +655,7 @@ def Check_if_Combination_Is_Correct():
         OpenSafe()
         insert.destroy()
         check.destroy()
+    
     else:
         winsound.PlaySound("sounds/door.wav", winsound.SND_ASYNC)
         wrong_combination = Label(text = "The combination is wrong")
@@ -666,6 +666,7 @@ def Check_if_Combination_Is_Correct():
         wrong_combination["font"] = "helvetica, 14"
         insert.destroy()
         check.destroy()
+    
     
 def Out():
     winsound.PlaySound("sounds/out.wav", winsound.SND_ASYNC) 
@@ -745,6 +746,8 @@ def OpenDoor():
         stay_btn.pack(pady=20)
         stay_btn.place(x =720, y = 600,width=50,height=50)
         
+
+                                            ########## BUTTONS #########
 
 
 drawer1_img = PhotoImage(file='images/drawer1.png')
@@ -844,7 +847,7 @@ bin.place(x=802, y=315)
 
 cupboard_img = PhotoImage(file='images/cupboard.png')
 cupboard = Button(command = AskCupboardombination,image=cupboard_img, highlightthickness = 0, bd = 0, cursor="circle")
-tip.bind_widget(cupboard,balloonmsg="Inspect bin")
+tip.bind_widget(cupboard,balloonmsg="Inspect cupboard")
 cupboard.place(x=1120, y=295)
 
 plant_img = PhotoImage(file='images/plant.png')
