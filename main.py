@@ -860,7 +860,4 @@ big_book = Button(command = OpenBook,image=big_book_img, highlightthickness = 0,
 tip.bind_widget(big_book,balloonmsg="Inspect book")
 big_book.place(x=1133, y=378)
 
-
-
-
 window.mainloop()
